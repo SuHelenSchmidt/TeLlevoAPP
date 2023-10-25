@@ -6,12 +6,13 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AngularFireModule}  from '@angular/fire/compat'; 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AngularFireTellevoModule} from '@angular/fire/compat/Tellevo';
+import { AngularFireTellevoModule} from '@angular/fire/compat/tellevo';
 import { environment } from 'src/environments/environment';
+import { AngularFireTellevo}
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-  AngularFireModule, AngularFireTellevoModule, AngularFireModule.initializeApp(environment.firebaseConfig)],
+  AngularFireModule, AngularFireTellevoModule, AngularFireTellevo, AngularFireModule.initializeApp(environment.firebaseConfig)],
   
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

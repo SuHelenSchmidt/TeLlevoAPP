@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+ import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -6,7 +6,9 @@ import {
   FormBuilder,
   AbstractControl,
 } from '@angular/forms';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { AutheticationService } from '../authetication.service';
+import { emit } from 'process';
 
 @Component({
   selector: 'app-registro',
@@ -14,12 +16,16 @@ import { AlertController, NavController } from '@ionic/angular';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
+  regForm:FormGroup  | undefined;
   formularioRegistro: FormGroup;
+  formBuilder: any;
 
   constructor(
     public fb: FormBuilder,
     public alertController: AlertController,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
+    public  tellevoSerive:AutheticationService
   ) {
     this.formularioRegistro = this.fb.group(
       {
@@ -104,4 +110,34 @@ export class RegistroPage implements OnInit {
       return null;
     }
   }
+    // funcion fire base 
+
+    ng0nInit(){
+      this.regForm = this.formBuilder.group({
+        fullname : ['', [Validators.required]],
+        email : ['',[
+          Validators.required,
+          Validators.email,
+          Validators.pattern("[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z] {2,}$")
+        ]],
+        password:['',
+        Validators.required,
+        Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")
+      ]
+      })
+
+    }
+  
+    get errorControl(){
+      return this.regForm?.controls;
+    }
+
+    async signUp(){
+      const  loading = await this.loadingCtrl.create();
+      await loading.present();
+      if (this.regForm?.valid){
+        const user = await this.tellevoSerive.registerUser(email,password)
+      }
+
+    }
 }
