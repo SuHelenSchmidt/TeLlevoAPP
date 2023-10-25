@@ -33,7 +33,11 @@ const routes: Routes = [
   {
     path: 'viajar',
     loadChildren: () => import('./viajar/viajar.module').then( m => m.ViajarPageModule)
+  },  {
+    path: 'lading',
+    loadChildren: () => import('./lading/lading.module').then( m => m.LadingPageModule)
   }
+
 ];
 
 @NgModule({
