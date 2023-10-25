@@ -36,6 +36,14 @@ const routes: Routes = [
   },  {
     path: 'lading',
     loadChildren: () => import('./lading/lading.module').then( m => m.LadingPageModule)
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   }
 
 ];
